@@ -16,6 +16,7 @@ function singUp() {
       const user = { name, email, pass };
       console.log(user); 
       const response = await axios.post("http://localhost:3000/users", user);
+      navigate("/login")
     } catch (error) {
       console.log(error);
     }

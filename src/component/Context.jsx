@@ -8,12 +8,14 @@ function Context({children}) {
     const [text ,setText] = useState("")
     const [carts , setCarts] = useState([])
     const [users , setUsers] = useState([])
+    
 
     useEffect(() => {
         const fetchUser = async() => {
             try{
                 const responce = await axios.get("http://localhost:3000/users")
                 setUsers(responce.data)
+                // console.log(users)
                 
             }
             catch(error){
@@ -25,7 +27,7 @@ function Context({children}) {
     })
 
   return (
-   <mainContext.Provider value={{navigate , setText , text , carts , setCarts , setUsers , users}}>
+   <mainContext.Provider value={{navigate , setText , text , carts , setCarts , setUsers , users , setCarts}}>
     {children}
    </mainContext.Provider>
   )

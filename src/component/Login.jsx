@@ -1,32 +1,36 @@
-import React, { useContext } from 'react'
-import { mainContext } from './Context'
-import axios from 'axios'
+import React, { useContext, useEffect, useState } from "react";
+import { mainContext } from "./Context";
+import axios from "axios";
 
 function login() {
-    const {navigate} = useContext(mainContext)
+  const { navigate, users } = useContext(mainContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const login = async () => {
-        try{
-            const responce = await axios.get("http://localhost:3000/users")
-            
-        }
-        catch(error){
-
-        }
-    }
-
+  const handleSubmit = (e) => {
+e.preventDefault()
+  const user =   users.find((x) => x.email === email && x.pass === password)
+  if(user){
+    navigate("/")
+  }
+  else{
+    alert("wrong password and email")
+  }
+  };
   return (
     <div>
-        <form action="">
-            <label htmlFor="">email :</label>
-            <input type="text" />
-            <label htmlFor="">password :</label>
-            <input type="text" />
-            <button>Submit</button>
-            <button onClick={() => navigate("/")}>SignUp</button>
-        </form>
+      <form action="">
+        <label htmlFor="">email :</label>
+        <input type="email" onChange={(e) => setEmail(e.target.value)} />
+        <label htmlFor="">password :</label>
+        <input type="password"  onChange={(e) => setPassword(e.target.value)}/>
+        <button type="submit" onClick={handleSubmit}>
+          Submit
+        </button>
+        <button onClick={() => navigate("/signup")}>SignUp</button>
+      </form>
     </div>
-  )
+  );
 }
 
-export default login
+export default login;
